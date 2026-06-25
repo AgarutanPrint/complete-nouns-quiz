@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete Nouns Grammar Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9 0%, #e3f2fd 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+    max-width: 480px;
+    width: 100%;
+    padding: 28px 24px 24px;
+  }
+  /* MENU */
+  .brand {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 6px;
+  }
+  .menu-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a237e;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .menu-sub {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 22px;
+  }
+  .section-btn {
+    display: block;
+    width: 100%;
+    padding: 13px 16px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.18s, transform 0.12s;
+    text-align: left;
+  }
+  .section-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .section-btn:active { transform: scale(0.98); }
+  .btn-s1 { background: linear-gradient(135deg,#e3f2fd,#bbdefb); color: #0d47a1; }
+  .btn-s2 { background: linear-gradient(135deg,#fce4ec,#f8bbd0); color: #880e4f; }
+  .btn-s3 { background: linear-gradient(135deg,#e8f5e9,#c8e6c9); color: #1b5e20; }
+  .btn-s4 { background: linear-gradient(135deg,#fff3e0,#ffe0b2); color: #e65100; }
+  .btn-s5 { background: linear-gradient(135deg,#ede7f6,#d1c4e9); color: #4a148c; }
+  .btn-mastery {
+    background: linear-gradient(135deg,#7b1fa2,#4a148c);
+    color: #fff;
+    font-size: 16px;
+    margin-top: 6px;
+  }
+  /* QUIZ */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .progress-bar-wrap {
+    background: #eee;
+    border-radius: 6px;
+    height: 7px;
+    flex: 1;
+    margin: 0 10px;
+  }
+  .progress-bar-fill {
+    height: 7px;
+    border-radius: 6px;
+    background: linear-gradient(90deg,#42a5f5,#1976d2);
+    transition: width 0.3s;
+  }
+  .q-count { font-size: 12px; color: #888; font-weight: 700; }
+  .question-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 18px;
+    line-height: 1.45;
+  }
+  .hint-text {
+    font-size: 13px;
+    background: #fff8e1;
+    border-left: 4px solid #ffd54f;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #5d4037;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .option-btn {
+    background: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border 0.15s, transform 0.1s;
+  }
+  .option-btn:hover:not(:disabled) { background: #e3f2fd; border-color: #90caf9; transform: translateY(-1px); }
+  .option-btn.correct { background: #e8f5e9; border-color: #66bb6a; color: #2e7d32; }
+  .option-btn.wrong { background: #ffebee; border-color: #ef9a9a; color: #c62828; }
+  .feedback {
+    margin-top: 13px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    min-height: 20px;
+  }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+  .action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .btn-hint {
+    flex: 1;
+    padding: 11px;
+    border: 2px solid #ffd54f;
+    background: #fffde7;
+    color: #f57f17;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-hint:hover { background: #fff9c4; }
+  .btn-next {
+    flex: 2;
+    padding: 11px;
+    background: linear-gradient(135deg,#42a5f5,#1976d2);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-next:hover { opacity: 0.88; }
+  .btn-next:disabled { opacity: 0.4; cursor: default; }
+  .btn-exit {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    background: #fff0f0;
+    border: 2px solid #ef9a9a;
+    color: #c62828;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+  .btn-exit:hover { background: #ef9a9a; border-color: #c62828; color: #b71c1c; }
+  /* END SCREEN */
+  .end-screen { text-align: center; }
+  .trophy { font-size: 52px; margin-bottom: 6px; }
+  .stars-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; min-height: 36px; }
+  .star { font-size: 28px; opacity: 0; transform: scale(0.3); transition: opacity 0.35s, transform 0.35s; }
+  .star.pop { opacity: 1; transform: scale(1); }
+  .end-title { font-size: 22px; font-weight: 800; color: #1a237e; margin-bottom: 4px; }
+  .end-subtitle { font-size: 14px; color: #666; margin-bottom: 18px; }
+  .pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+  .pill {
+    background: #f5f5f5;
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .pill span { font-size: 10px; color: #999; font-weight: 600; }
+  .end-btn-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 12px; }
+  .btn-retry {
+    padding: 11px 22px;
+    background: linear-gradient(135deg,#42a5f5,#1976d2);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-retry:hover { opacity: 0.88; }
+  .btn-menu-end {
+    padding: 11px 22px;
+    background: #f5f5f5;
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;
+    border: 2px solid #e0e0e0;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-menu-end:hover { background: #eeeeee; }
+  /* REVIEW BOX */
+  .review-box {
+    background: #f9f9ff;
+    border: 1.5px solid #e0e0ff;
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-top: 10px;
+    text-align: left;
+  }
+  .review-box-header {
+    font-size: 13px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .review-box-q {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .review-box p { font-size: 13px; color: #555; line-height: 1.55; margin-bottom: 8px; }
+  .review-btn {
+    display: block;
+    width: 100%;
+    padding: 11px 14px;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-top: 8px;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .review-btn:hover { opacity: 0.82; }
+  /* ENCOURAGING */
+  .encourage-icon { font-size: 48px; margin-bottom: 8px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="card" id="app"></div>
+
+<script>
+(function(){
+"use strict";
+
+// ── URL param detection ──────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const SRC = params.get('src'); // 'etsy' | 'amazon' | null
+
+const PAPERBACK_ASIN = 'B0H1L5THD7';
+const HARDCOVER_ASIN = 'B0H1VV9YJY';
+const ETSY_URL = 'https://www.etsy.com/your/purchases';
+const AMAZON_PB_URL = 'https://www.amazon.com/review/create-review?asin=' + PAPERBACK_ASIN;
+const AMAZON_HC_URL = 'https://www.amazon.com/review/create-review?asin=' + HARDCOVER_ASIN;
+
+// ── Question data ────────────────────────────────────────────────
+const SECTIONS = [
+  {
+    id: 's1',
+    title: 'Section 1: Singular & Plural Nouns',
+    short: 'Section 1',
+    btnClass: 'btn-s1',
+    emoji: '📘',
+    questions: [
+      {
+        q: 'What is the plural of "fox"?',
+        options: ['foxs','foxes','foxies','fox'],
+        answer: 'foxes',
+        hint: 'Words ending in -x need -es, not just -s.'
+      },
+      {
+        q: 'What is the plural of "baby"?',
+        options: ['babys','babiess','babies','babyes'],
+        answer: 'babies',
+        hint: 'When a word ends in consonant + y, change y to -ies.'
+      },
+      {
+        q: 'Which is the correct plural of "child"?',
+        options: ['childs','childes','childrens','children'],
+        answer: 'children',
+        hint: 'Child is an irregular plural — it changes completely.'
+      },
+      {
+        q: 'What is the plural of "leaf"?',
+        options: ['leafs','leafes','leaves','leafies'],
+        answer: 'leaves',
+        hint: 'Some words ending in -f change to -ves in the plural.'
+      },
+      {
+        q: 'Which sentence uses the correct plural?',
+        options: ['I see two mouses.','I see two mices.','I see two mice.','I see two mousies.'],
+        answer: 'I see two mice.',
+        hint: 'Mouse is an irregular noun — mouse → mice.'
+      },
+      {
+        q: 'What is the plural of "brush"?',
+        options: ['brushs','brushes','brushies','brush'],
+        answer: 'brushes',
+        hint: 'Words ending in -sh need -es added.'
+      },
+      {
+        q: 'Which word stays the SAME in both singular and plural?',
+        options: ['cat','deer','box','lady'],
+        answer: 'deer',
+        hint: 'Some nouns like deer, sheep, and fish stay the same.'
+      },
+      {
+        q: 'What is the plural of "city"?',
+        options: ['citys','cityes','cities','cityes'],
+        answer: 'cities',
+        hint: 'City ends in consonant + y, so change y to -ies.'
+      },
+      {
+        q: 'What is the plural of "tooth"?',
+        options: ['tooths','teethes','toothes','teeth'],
+        answer: 'teeth',
+        hint: 'Tooth is an irregular noun — tooth → teeth.'
+      },
+      {
+        q: 'What is the plural of "bus"?',
+        options: ['buss','buses','busies','busses'],
+        answer: 'buses',
+        hint: 'Words ending in -s need -es added.'
+      },
+      {
+        q: 'Which rule applies to "watch → watches"?',
+        options: ['Add -s','Change y to -ies','Add -es (ends in -ch)','Irregular plural'],
+        answer: 'Add -es (ends in -ch)',
+        hint: 'Words ending in -ch or -sh add -es.'
+      },
+      {
+        q: 'What is the plural of "woman"?',
+        options: ['womans','womens','women','womanies'],
+        answer: 'women',
+        hint: 'Woman is an irregular plural — woman → women.'
+      },
+      {
+        q: 'Which is the correct plural of "monkey"?',
+        options: ['monkies','monkeys','monkeyes','monkys'],
+        answer: 'monkeys',
+        hint: 'Monkey ends in vowel + y, so just add -s.'
+      },
+      {
+        q: 'What is the plural of "goose"?',
+        options: ['gooses','geeses','goosies','geese'],
+        answer: 'geese',
+        hint: 'Goose is an irregular noun — goose → geese.'
+      },
+      {
+        q: 'What is the plural of "class"?',
+        options: ['classs','clases','classes','classis'],
+        answer: 'classes',
+        hint: 'Words ending in -s need -es added.'
+      }
+    ]
+  },
+  {
+    id: 's2',
+    title: 'Section 2: Common & Proper Nouns',
+    short: 'Section 2',
+    btnClass: 'btn-s2',
+    emoji: '📗',
+    questions: [
+      {
+        q: 'Which word is a PROPER noun?',
+        options: ['city','country','Paris','street'],
+        answer: 'Paris',
+        hint: 'Proper nouns name a specific person, place, or thing — they always start with a capital letter.'
+      },
+      {
+        q: 'Which word is a COMMON noun?',
+        options: ['London','Emma','month','Monday'],
+        answer: 'month',
+        hint: 'Common nouns are general words — they do NOT start with a capital letter.'
+      },
+      {
+        q: 'Which sentence is written CORRECTLY?',
+        options: [
+          'every friday, emma visits her grandma in paris.',
+          'Every Friday, Emma visits her grandma in Paris.',
+          'Every friday, emma visits her Grandma in Paris.',
+          'every Friday, Emma visits her grandma in Paris.'
+        ],
+        answer: 'Every Friday, Emma visits her grandma in Paris.',
+        hint: 'Days of the week, names, and cities are proper nouns — they need capital letters.'
+      },
+      {
+        q: 'Which word is a proper noun?',
+        options: ['rabbit','pet','animal','Snowball'],
+        answer: 'Snowball',
+        hint: 'A specific pet name is a proper noun and needs a capital letter.'
+      },
+      {
+        q: 'Which is a COMMON noun?',
+        options: ['Brazil','Tokyo','Rome','country'],
+        answer: 'country',
+        hint: 'Common nouns are general names — "country" names a general place, not a specific one.'
+      },
+      {
+        q: '"August" is what type of noun?',
+        options: ['Common noun','Abstract noun','Proper noun','Plural noun'],
+        answer: 'Proper noun',
+        hint: 'Months of the year are always proper nouns!'
+      },
+      {
+        q: 'Which sentence uses capital letters CORRECTLY?',
+        options: [
+          'My rabbit snowball loves carrots.',
+          'My Rabbit Snowball loves carrots.',
+          'My rabbit Snowball loves carrots.',
+          'my rabbit snowball loves Carrots.'
+        ],
+        answer: 'My rabbit Snowball loves carrots.',
+        hint: 'Only the pet\'s specific name (Snowball) is a proper noun — rabbit is a common noun.'
+      },
+      {
+        q: 'Which word is a PROPER noun?',
+        options: ['doctor','nurse','teacher','Dr. Harris'],
+        answer: 'Dr. Harris',
+        hint: 'A title + specific name is a proper noun.'
+      },
+      {
+        q: 'Which pair correctly shows common noun → proper noun?',
+        options: ['day → Time','city → place','dog → Biscuit','teacher → school'],
+        answer: 'dog → Biscuit',
+        hint: 'A common noun names a general thing; a proper noun names a specific one (like a pet\'s name).'
+      },
+      {
+        q: 'Do common nouns start with a capital letter?',
+        options: ['Yes, always','No, never (unless starting a sentence)','Only if they name an animal','Only on Mondays'],
+        answer: 'No, never (unless starting a sentence)',
+        hint: 'Only proper nouns ALWAYS start with a capital. Common nouns only capitalise at the start of a sentence.'
+      },
+      {
+        q: 'Which sentence has a mistake?',
+        options: [
+          'Sophie visits London every August.',
+          'jake and Sophie went to manchester in June.',
+          'My cat Biscuit sleeps on Saturday.',
+          'Dr. Brown helps children every Wednesday.'
+        ],
+        answer: 'jake and Sophie went to manchester in June.',
+        hint: 'Names and city names are proper nouns — Jake and Manchester both need capital letters.'
+      },
+      {
+        q: 'Choose the correct word: "We listened to ________ Jones explain the experiment." (professor / Professor)',
+        options: ['professor','Professor','PROFESSOR','prof.'],
+        answer: 'Professor',
+        hint: 'When a title is used directly before a specific name, it becomes part of the proper noun.'
+      }
+    ]
+  },
+  {
+    id: 's3',
+    title: 'Section 3: Concrete & Abstract Nouns',
+    short: 'Section 3',
+    btnClass: 'btn-s3',
+    emoji: '📙',
+    questions: [
+      {
+        q: 'Which noun can you touch or pick up?',
+        options: ['courage','joy','peace','pebble'],
+        answer: 'pebble',
+        hint: 'Concrete nouns are things you can experience with your five senses.'
+      },
+      {
+        q: 'Which noun is ABSTRACT?',
+        options: ['drum','blanket','lantern','freedom'],
+        answer: 'freedom',
+        hint: 'Abstract nouns are feelings, ideas, qualities, or states — you cannot touch them.'
+      },
+      {
+        q: 'A trophy is a ___ noun and pride is a ___ noun.',
+        options: ['abstract / concrete','concrete / abstract','proper / common','countable / uncountable'],
+        answer: 'concrete / abstract',
+        hint: 'You can hold a trophy (concrete) but you can only feel pride (abstract).'
+      },
+      {
+        q: 'Which word is a CONCRETE noun?',
+        options: ['kindness','honesty','volcano','hope'],
+        answer: 'volcano',
+        hint: 'Concrete = Connect to your senses! Can you see it or touch it?'
+      },
+      {
+        q: 'Which is an ABSTRACT noun?',
+        options: ['hammer','thunder','sandcastle','silence'],
+        answer: 'silence',
+        hint: 'Silence is a state — you experience it but cannot touch or see it.'
+      },
+      {
+        q: 'The explorer packed a _______ for the cold mountain climb.',
+        options: ['courage','freedom','shawl','patience'],
+        answer: 'shawl',
+        hint: 'You pack a physical item you can carry and wear.'
+      },
+      {
+        q: 'Which noun names a feeling you cannot touch?',
+        options: ['waterfall','violin','excitement','telescope'],
+        answer: 'excitement',
+        hint: 'Feelings are abstract nouns — you experience them but cannot hold them.'
+      },
+      {
+        q: 'What is the test for telling concrete from abstract nouns?',
+        options: [
+          'Ask: does it start with a capital letter?',
+          'Ask: can I put it in a bag and carry it home?',
+          'Ask: does it have a plural form?',
+          'Ask: is it a person, place, or thing?'
+        ],
+        answer: 'Ask: can I put it in a bag and carry it home?',
+        hint: 'If YES → concrete noun. If NO → abstract noun!'
+      },
+      {
+        q: 'Which sentence uses an abstract noun CORRECTLY?',
+        options: [
+          'She spread a thick layer of silence on her toast.',
+          'He picked up his heavy sadness and walked into battle.',
+          'Everyone felt great joy after the team won.',
+          'The sailor used a feeling to find the island.'
+        ],
+        answer: 'Everyone felt great joy after the team won.',
+        hint: 'Joy is an abstract noun (a feeling) — it makes sense to FEEL it, not carry or spread it.'
+      },
+      {
+        q: 'Which noun CAN be discovered with your five senses?',
+        options: ['bravery','curiosity','love','thunder'],
+        answer: 'thunder',
+        hint: 'You can HEAR thunder — that makes it a concrete noun.'
+      },
+      {
+        q: '"Kindness" is a _____ noun because _____.',
+        options: [
+          'concrete / you can hold it',
+          'abstract / it is a quality you cannot touch',
+          'proper / it starts with a capital letter',
+          'plural / it ends in -ness'
+        ],
+        answer: 'abstract / it is a quality you cannot touch',
+        hint: 'Abstract nouns include qualities like kindness, courage, and patience.'
+      },
+      {
+        q: 'In the sentence "She held onto hope even when things were hard", what type of noun is "hope"?',
+        options: ['Concrete noun','Proper noun','Abstract noun','Plural noun'],
+        answer: 'Abstract noun',
+        hint: 'Hope is an idea — it has no shape or colour you can sense.'
+      },
+      {
+        q: 'Which group contains ONLY concrete nouns?',
+        options: [
+          'hammer, lantern, thunder, volcano',
+          'sadness, bravery, silence, love',
+          'kindness, courage, hope, peace',
+          'truth, freedom, childhood, fairness'
+        ],
+        answer: 'hammer, lantern, thunder, volcano',
+        hint: 'Concrete nouns are things you can see, touch, hear, taste, or smell.'
+      }
+    ]
+  },
+  {
+    id: 's4',
+    title: 'Section 4: Countable & Uncountable Nouns',
+    short: 'Section 4',
+    btnClass: 'btn-s4',
+    emoji: '📒',
+    questions: [
+      {
+        q: 'Which noun is COUNTABLE?',
+        options: ['milk','rice','sugar','coin'],
+        answer: 'coin',
+        hint: 'Countable nouns have both singular and plural forms — you can count them one by one.'
+      },
+      {
+        q: 'Which noun is UNCOUNTABLE?',
+        options: ['notebook','feather','flour','glove'],
+        answer: 'flour',
+        hint: 'Uncountable nouns cannot be counted — you cannot say "two flours".'
+      },
+      {
+        q: 'Which sentence is CORRECT?',
+        options: [
+          'She put a milk in her tea.',
+          'She put some milk in her tea.',
+          'She put milks in her tea.',
+          'She put an milk in her tea.'
+        ],
+        answer: 'She put some milk in her tea.',
+        hint: 'Milk is uncountable — never use a/an. Use "some" instead.'
+      },
+      {
+        q: 'Which question word do you use for UNCOUNTABLE nouns?',
+        options: ['How many?','How few?','How much?','How several?'],
+        answer: 'How much?',
+        hint: 'Use "How much?" for uncountable nouns, and "How many?" for countable nouns.'
+      },
+      {
+        q: 'Which article is correct: "She found _______ shining under the bench." (coin)',
+        options: ['some coin','a coins','a coin','an coin'],
+        answer: 'a coin',
+        hint: 'Coin is a singular countable noun starting with a consonant sound — use "a".'
+      },
+      {
+        q: 'Which sentence has a MISTAKE?',
+        options: [
+          'She drank some water.',
+          'He had a homework to finish.',
+          'They packed three notebooks.',
+          'We need some flour for the cake.'
+        ],
+        answer: 'He had a homework to finish.',
+        hint: 'Homework is uncountable — never use "a" before it. Just say "homework".'
+      },
+      {
+        q: 'Which helper phrase is correct?',
+        options: ['a milk of glass','a glass of milk','glass of a milk','some glass of milk'],
+        answer: 'a glass of milk',
+        hint: 'Uncountable nouns use helper phrases like "a glass of", "a bowl of", or "a cup of".'
+      },
+      {
+        q: '"Snow" in the sentence "The children played in the snow" is a _____ noun.',
+        options: ['countable','proper','abstract','uncountable'],
+        answer: 'uncountable',
+        hint: 'You cannot say "one snow" or "two snows" — snow is uncountable.'
+      },
+      {
+        q: 'Which word goes with "an ______"?',
+        options: ['ruler','umbrella','book','pen'],
+        answer: 'umbrella',
+        hint: 'Use "an" before a singular countable noun that starts with a VOWEL sound.'
+      },
+      {
+        q: 'Which group contains ONLY uncountable nouns?',
+        options: [
+          'pen, ruler, coin, feather',
+          'milk, flour, sugar, wool',
+          'notebook, glove, cloud, leaf',
+          'egg, bottle, candle, button'
+        ],
+        answer: 'milk, flour, sugar, wool',
+        hint: 'Uncountable nouns include liquids, materials, and food stuffs you cannot count individually.'
+      },
+      {
+        q: 'Which sentence is CORRECT?',
+        options: [
+          'The teacher gave us many good advices.',
+          'The teacher gave us much advices.',
+          'The teacher gave us some good advice.',
+          'The teacher gave us an advice.'
+        ],
+        answer: 'The teacher gave us some good advice.',
+        hint: '"Advice" is uncountable — no plural, no a/an. Use "some" instead.'
+      },
+      {
+        q: 'Complete: "She found _______ (3 / notebook) in her bag."',
+        options: ['three notebook','a three notebooks','three notebooks','some three notebook'],
+        answer: 'three notebooks',
+        hint: 'Notebook is countable — use the number + plural form.'
+      },
+      {
+        q: '"Perfect pairs" — which is CORRECT?',
+        options: ['a bread','a loaf of bread','two breads','some bread of loaf'],
+        answer: 'a loaf of bread',
+        hint: 'Bread is uncountable — use a helper phrase like "a loaf of" to measure it.'
+      }
+    ]
+  },
+  {
+    id: 's5',
+    title: 'Section 5: Possessive Nouns',
+    short: 'Section 5',
+    btnClass: 'btn-s5',
+    emoji: '📕',
+    questions: [
+      {
+        q: 'How do you write the possessive of "the girl" (singular)?',
+        options: ["girls'","girl's","girls","girls's"],
+        answer: "girl's",
+        hint: 'For singular nouns, add \'s — the apostrophe comes BEFORE the s.'
+      },
+      {
+        q: 'Which sentence uses a SINGULAR possessive noun correctly?',
+        options: [
+          "The dogs bone was buried under the tree.",
+          "The dog's bone was buried under the tree.",
+          "The dogs' bone was buried under the tree.",
+          "The dog bone's was buried under the tree."
+        ],
+        answer: "The dog's bone was buried under the tree.",
+        hint: 'One dog owns the bone — add \'s after the singular noun.'
+      },
+      {
+        q: 'How do you write the possessive of "the teachers" (more than one teacher)?',
+        options: ["teacher's","teachers's","teachers'","the teacher"],
+        answer: "teachers'",
+        hint: 'For plural nouns ending in s, add the apostrophe AFTER the s: teachers\''
+      },
+      {
+        q: 'Which is the PLURAL possessive of "birds"?',
+        options: ["bird's nests","birds's nests","birds' nests","the birds nest"],
+        answer: "birds' nests",
+        hint: 'More than one bird owns nests — the apostrophe goes AFTER the s.'
+      },
+      {
+        q: 'How do you write the possessive of "the children" (irregular plural)?',
+        options: ["childrens'","children's","childrens","the childrens"],
+        answer: "children's",
+        hint: 'Irregular plurals (not ending in s) use \'s — just like singular nouns.'
+      },
+      {
+        q: 'Which sentence is CORRECT?',
+        options: [
+          "The womens scarves were knitted in bright colours.",
+          "The women's scarves were knitted in bright colours.",
+          "The womens' scarves were knitted in bright colours.",
+          "The woman's scarves were knitted in bright colours."
+        ],
+        answer: "The women's scarves were knitted in bright colours.",
+        hint: 'Women is an irregular plural (not ending in s) — add \'s.'
+      },
+      {
+        q: 'Find the mistake: "The swimmers\'s towels were by the pool."',
+        options: ["swimmers'","swimmers's","the swimmers","towels"],
+        answer: "swimmers'",
+        hint: 'For regular plurals ending in s, just add one apostrophe AFTER the s — no extra \'s.'
+      },
+      {
+        q: 'Whose? — "The bicycle belongs to one girl." What is the possessive?',
+        options: ["the girls bicycle","the girls' bicycle","the girl's bicycle","the girl bicycle"],
+        answer: "the girl's bicycle",
+        hint: 'ONE owner → add \'s after the singular noun.'
+      },
+      {
+        q: 'Which is the correct singular possessive?',
+        options: ["the rabbit cage","the rabbit's cage","the rabbits' cage","the rabbits cage"],
+        answer: "the rabbit's cage",
+        hint: 'ONE rabbit owns the cage — add \'s.'
+      },
+      {
+        q: 'Complete: "The _______ helmets were checked before launch." (astronauts — plural)',
+        options: ["astronaut's","astronauts's","astronauts'","astronaut"],
+        answer: "astronauts'",
+        hint: 'Many astronauts own the helmets — plural ending in s → add apostrophe after s.'
+      },
+      {
+        q: 'The _______ map was old and worn. (one explorer owns the map)',
+        options: ["explorers map","explorers'","explorer's","explorer"],
+        answer: "explorer's",
+        hint: 'ONE explorer owns the map — singular possessive → add \'s.'
+      },
+      {
+        q: 'Which irregular plural possessive is CORRECT?',
+        options: ["mens' boots","men's boots","mens boots","man's boots (for many men)"],
+        answer: "men's boots",
+        hint: 'Men is an irregular plural (not ending in s) — add \'s just like a singular noun.'
+      },
+      {
+        q: 'Rewrite: "The trophies that belong to the winners."',
+        options: ["the winner's trophies","the winners' trophies","the winners trophies","the winners trophy"],
+        answer: "the winners' trophies",
+        hint: 'Multiple winners own the trophies — regular plural ending in s → add apostrophe after s.'
+      }
+    ]
+  },
+  {
+    id: 'mastery',
+    title: '🏆 Noun Master! — Final Mastery Test',
+    short: 'Mastery Test',
+    btnClass: 'btn-mastery',
+    emoji: '🏆',
+    isMastery: true,
+    questions: [
+      {
+        q: 'She has two _______ in her pencil case.',
+        options: ['ruler','rulers','ruleres','rulors'],
+        answer: 'rulers',
+        hint: 'More than two means plural — ruler just adds -s.'
+      },
+      {
+        q: 'The _______ ran across the field and disappeared into the trees.',
+        options: ['deers','deer','deeries','deeres'],
+        answer: 'deer',
+        hint: 'Deer is an irregular noun — it stays the same in singular and plural.'
+      },
+      {
+        q: 'We visited _______ last summer and saw the Eiffel Tower.',
+        options: ['paris','a paris','Paris','the paris'],
+        answer: 'Paris',
+        hint: 'Paris is a proper noun — city names always start with a capital letter.'
+      },
+      {
+        q: 'My favourite author is _______ who writes adventure stories.',
+        options: ['mr harris','mr. Harris','Mr Harris','mr. harris'],
+        answer: 'Mr Harris',
+        hint: 'A title + name is a proper noun — both words need capital letters.'
+      },
+      {
+        q: 'She picked up the _______ and felt its rough surface.',
+        options: ['stone','courage','freedom','silence'],
+        answer: 'stone',
+        hint: 'You can FEEL the rough surface with your fingers — that\'s a concrete noun.'
+      },
+      {
+        q: 'The whole team felt great _______ after winning the match.',
+        options: ['trophy','stadium','pride','helmet'],
+        answer: 'pride',
+        hint: 'A feeling you cannot touch or see is an abstract noun.'
+      },
+      {
+        q: 'He poured _______ into his bowl and added some fruit.',
+        options: ['a porridge','porridges','some porridge','an porridge'],
+        answer: 'some porridge',
+        hint: 'Porridge is uncountable — never use a/an. Use "some" instead.'
+      },
+      {
+        q: 'She found _______ shining under the old bench.',
+        options: ['a coin','some coin','a coins','coin'],
+        answer: 'a coin',
+        hint: 'Coin is a singular countable noun starting with a consonant — use "a".'
+      },
+      {
+        q: 'The _______ bicycle was parked outside the school gate. (one girl owns it)',
+        options: ["girls","girl's","girls'","girl"],
+        answer: "girl's",
+        hint: 'ONE girl owns the bicycle → singular possessive → add \'s.'
+      },
+      {
+        q: 'All the _______ paintings were displayed in the hall. (many students own them)',
+        options: ["students","student's","students'","student"],
+        answer: "students'",
+        hint: 'MANY students own the paintings → plural possessive → add apostrophe after s.'
+      },
+      {
+        q: 'What TYPE of noun is "joy" in: "She felt great joy after winning the race"?',
+        options: ['Concrete noun','Proper noun','Common noun','Abstract noun'],
+        answer: 'Abstract noun',
+        hint: 'Joy is a feeling — you cannot touch or see it.'
+      },
+      {
+        q: 'What TYPE of noun is "flour" in: "We need some flour to finish baking the cake"?',
+        options: ['Countable noun','Proper noun','Possessive noun','Uncountable noun'],
+        answer: 'Uncountable noun',
+        hint: 'You cannot say "one flour" or "two flours" — flour is uncountable.'
+      },
+      {
+        q: 'Find the mistake: "She has three childs in her class."',
+        options: ['three','She has','childs','in her class'],
+        answer: 'childs',
+        hint: 'Child is an irregular plural — child → children.'
+      },
+      {
+        q: 'What TYPE of noun is "Tokyo" in: "My favourite city is Tokyo"?',
+        options: ['Common noun','Uncountable noun','Proper noun','Abstract noun'],
+        answer: 'Proper noun',
+        hint: 'Tokyo is a specific city name — it always starts with a capital letter.'
+      },
+      {
+        q: 'Which sentence is COMPLETELY correct?',
+        options: [
+          "The women's team won every match that season.",
+          "The womens' team won every match that season.",
+          "The womens team won every match that season.",
+          "The woman's team won every match that season."
+        ],
+        answer: "The women's team won every match that season.",
+        hint: 'Women is an irregular plural (not ending in s) — add \'s.'
+      }
+    ]
+  }
+];
+
+// ── State ────────────────────────────────────────────────────────
+let state = {
+  screen: 'menu',
+  sectionIdx: 0,
+  questions: [],
+  qIdx: 0,
+  answered: false,
+  hintUsed: false,
+  points: 0,
+  correct: 0,
+  wrong: 0
+};
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function prepareQuestions(section) {
+  return shuffle(section.questions).map(q => ({
+    ...q,
+    options: shuffle(q.options)
+  }));
+}
+
+// ── Render ───────────────────────────────────────────────────────
+const app = document.getElementById('app');
+
+function render() {
+  if (state.screen === 'menu') renderMenu();
+  else if (state.screen === 'quiz') renderQuiz();
+  else if (state.screen === 'end') renderEnd();
+}
+
+function renderMenu() {
+  app.innerHTML = `
+    <div class="brand">Agarutan Print</div>
+    <div class="menu-title">The Complete Nouns<br>Grammar Quiz</div>
+    <div class="menu-sub">Grades 2–4 • Choose a section to begin!</div>
+    ${SECTIONS.map((s, i) => `
+      <button class="section-btn ${s.btnClass}" onclick="startSection(${i})">
+        ${s.emoji} ${s.title}
+      </button>
+    `).join('')}
+  `;
+}
+
+function renderQuiz() {
+  const section = SECTIONS[state.sectionIdx];
+  const q = state.questions[state.qIdx];
+  const total = state.questions.length;
+  const pct = (state.qIdx / total) * 100;
+
+  app.innerHTML = `
+    <div class="section-header">
+      <span class="section-label">${section.short}</span>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" style="width:${pct}%"></div>
+      </div>
+      <span class="q-count">${state.qIdx + 1}/${total}</span>
+    </div>
+    <div class="question-text">${q.q}</div>
+    <div class="hint-text" id="hintBox">💡 ${q.hint}</div>
+    <div class="options" id="optionsWrap">
+      ${q.options.map(opt => `
+        <button class="option-btn" onclick="selectOption(this,'${escHtml(opt)}','${escHtml(q.answer)}')">${opt}</button>
+      `).join('')}
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="action-row">
+      <button class="btn-hint" id="hintBtn" onclick="showHint()" ${state.hintUsed ? 'disabled style="opacity:0.4"' : ''}>💡 Hint</button>
+      <button class="btn-next" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
+    </div>
+    <button class="btn-exit" onclick="exitToMenu()">✕ Exit to Menu</button>
+  `;
+}
+
+function escHtml(str) {
+  return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function renderEnd() {
+  const section = SECTIONS[state.sectionIdx];
+  const total = state.questions.length;
+  const pct = Math.round((state.correct / total) * 100);
+  const passed = pct >= 70;
+  const isMastery = !!section.isMastery;
+
+  let titleText = '', subtitleText = '';
+  if (passed) {
+    if (pct === 100) titleText = '🏆 Spectacular!';
+    else if (pct >= 85) titleText = '⭐ Excellent!';
+    else titleText = '🌟 Great Job!';
+    subtitleText = `You scored ${pct}% on ${section.short}!`;
+  } else {
+    subtitleText = `You scored ${pct}% — keep practising!`;
+  }
+
+  const showReview = isMastery && passed && SRC !== null;
+
+  let reviewHtml = '';
+  if (showReview) {
+    let btnHtml = '';
+    if (SRC === 'etsy') {
+      btnHtml = `<a href="${ETSY_URL}" target="_blank" class="review-btn">⭐ Leave a Review on Etsy</a>`;
+    } else if (SRC === 'amazon') {
+      btnHtml = `
+        <a href="${AMAZON_PB_URL}" target="_blank" class="review-btn">📗 Review Paperback on Amazon</a>
+        <a href="${AMAZON_HC_URL}" target="_blank" class="review-btn" style="margin-top:6px">📘 Review Hardcover on Amazon</a>
+      `;
+    }
+    reviewHtml = `
+      <div class="review-box">
+        <div class="review-box-header">🔒 Notice: For Parents &amp; Educators</div>
+        <div class="review-box-q">How did you like this complete resource bundle?</div>
+        <p>Thank you for choosing Agarutan Print! We hope this combination of printable worksheets, the digital fillable PDF, and the interactive quiz bonus is helping to build your student's skills.</p>
+        <p>If this comprehensive resource bundle added value to your student's learning experience, please take a brief moment to share your feedback. Your review helps us continue creating high-quality learning assets!</p>
+        ${btnHtml}
+      </div>
+    `;
+  }
+
+  if (passed) {
+    app.innerHTML = `
+      <div class="end-screen">
+        <div class="trophy">🏆</div>
+        <div class="stars-row" id="starsRow">
+          <span class="star" id="st0">⭐</span>
+          <span class="star" id="st1">⭐</span>
+          <span class="star" id="st2">⭐</span>
+          <span class="star" id="st3">⭐</span>
+          <span class="star" id="st4">⭐</span>
+        </div>
+        <div class="end-title">${titleText}</div>
+        <div class="end-subtitle">${subtitleText}</div>
+        <div class="pills">
+          <div class="pill">${state.points}<span>Points</span></div>
+          <div class="pill">✅ ${state.correct}<span>Correct</span></div>
+          <div class="pill">❌ ${state.wrong}<span>Wrong</span></div>
+          <div class="pill">${pct}%<span>Score</span></div>
+        </div>
+        <div class="end-btn-row">
+          <button class="btn-retry" onclick="startSection(${state.sectionIdx})">🔄 Try Again</button>
+          <button class="btn-menu-end" onclick="goMenu()">🏠 Menu</button>
+        </div>
+        ${reviewHtml}
+      </div>
+    `;
+    // Animate stars
+    [0,1,2,3,4].forEach((i) => {
+      setTimeout(() => {
+        const el = document.getElementById('st'+i);
+        if (el) el.classList.add('pop');
+      }, 150 + i * 180);
+    });
+  } else {
+    app.innerHTML = `
+      <div class="end-screen">
+        <div class="encourage-icon">💪</div>
+        <div class="end-title">Keep Going!</div>
+        <div class="end-subtitle">${subtitleText}<br>You can do it — try again!</div>
+        <div class="pills">
+          <div class="pill">${state.points}<span>Points</span></div>
+          <div class="pill">✅ ${state.correct}<span>Correct</span></div>
+          <div class="pill">❌ ${state.wrong}<span>Wrong</span></div>
+          <div class="pill">${pct}%<span>Score</span></div>
+        </div>
+        <div class="end-btn-row">
+          <button class="btn-retry" onclick="startSection(${state.sectionIdx})">🔄 Try Again</button>
+          <button class="btn-menu-end" onclick="goMenu()">🏠 Menu</button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ── Actions ──────────────────────────────────────────────────────
+window.startSection = function(idx) {
+  state.sectionIdx = idx;
+  state.questions = prepareQuestions(SECTIONS[idx]);
+  state.qIdx = 0;
+  state.answered = false;
+  state.hintUsed = false;
+  state.points = 0;
+  state.correct = 0;
+  state.wrong = 0;
+  state.screen = 'quiz';
+  render();
+};
+
+window.showHint = function() {
+  if (state.hintUsed || state.answered) return;
+  state.hintUsed = true;
+  const hintBox = document.getElementById('hintBox');
+  const hintBtn = document.getElementById('hintBtn');
+  if (hintBox) hintBox.style.display = 'block';
+  if (hintBtn) hintBtn.disabled = true;
+};
+
+window.selectOption = function(btn, selected, correct) {
+  if (state.answered) return;
+  state.answered = true;
+  const feedback = document.getElementById('feedback');
+  const nextBtn = document.getElementById('nextBtn');
+  const allBtns = document.querySelectorAll('.option-btn');
+
+  allBtns.forEach(b => {
+    b.disabled = true;
+    const bText = b.textContent.trim();
+    if (bText === correct) b.classList.add('correct');
+  });
+
+  if (selected === correct) {
+    btn.classList.add('correct');
+    const pts = state.hintUsed ? 5 : 10;
+    state.points += pts;
+    state.correct++;
+    feedback.textContent = state.hintUsed ? `✅ Correct! (+5 pts — hint used)` : `✅ Correct! (+10 pts)`;
+    feedback.className = 'feedback correct-fb';
+  } else {
+    btn.classList.add('wrong');
+    state.wrong++;
+    feedback.textContent = `❌ Not quite! The answer is: "${correct}"`;
+    feedback.className = 'feedback wrong-fb';
+  }
+
+  if (nextBtn) nextBtn.disabled = false;
+};
+
+window.nextQuestion = function() {
+  state.qIdx++;
+  state.answered = false;
+  state.hintUsed = false;
+  if (state.qIdx >= state.questions.length) {
+    state.screen = 'end';
+  }
+  render();
+};
+
+window.exitToMenu = function() {
+  goMenu();
+};
+
+window.goMenu = function() {
+  state.screen = 'menu';
+  render();
+};
+
+// ── Boot ─────────────────────────────────────────────────────────
+render();
+
+})();
+</script>
+</body>
+</html>
